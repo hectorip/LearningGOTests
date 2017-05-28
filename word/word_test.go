@@ -18,7 +18,7 @@ func TestNonPalindrome(t *testing.T) {
 }
 
 func TestAccentedPalindrome(t *testing.T) {
-	if !IsPalindrome("eté") {
+	if !IsPalindrome("été") {
 		t.Error(`IsPalindrome("eté") = false`)
 	}
 }

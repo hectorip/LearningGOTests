@@ -1,8 +1,8 @@
 # Go Tests
 
-Mis experimentos aprendiendo testing con Go, y con tal vez Test Driven Development.
+Mis experimentos aprendiendo testing con Go, y tal vez logre aprender a hacer Test Driven Development.
 
-## Sources
+## Fuentes
 
 Estoy usando como fuentes de información las siguientes:
 
@@ -10,5 +10,5 @@ Estoy usando como fuentes de información las siguientes:
 
   - Screencast [Writing packages in Go using test-driven development](https://goo.gl/74pYhp)
 
-  - Acerca de la importancia del TDD [Introduction to Test Driven Development]§(https://goo.gl/P4WGex), desearía que
+  - Acerca de la importancia del TDD [Introduction to Test Driven Development](https://goo.gl/P4WGex), desearía que
   hubiera una versión en español.
