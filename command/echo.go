@@ -21,3 +21,11 @@ func main(){
 		os.Exit(1)
 	}
 }
+
+func echo(newline bool, sep string, args []string) error {
+	fmt.Fprint(out, strings.Join(args, sep))
+	if newline {
+		fmt.Fprintln(out)
+	}
+	return nil
+}
