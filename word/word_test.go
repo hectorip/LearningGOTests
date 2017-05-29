@@ -53,26 +53,40 @@ func TestSeveralExamples(t *testing.T){
 	}
 }
 
-func getRandomPalindrome(rng *rand.Rand) string{
+func getRandomPalindrome(rng *rand.Rand) (string, bool){
 	n := rng.Intn(25) // Número aleatóreo hasta 24,
 	runes := make([]rune, n)
+	want_palindrome := rng.Intn(2) != 0 || n < 2 // 0 -> No palíndromo, 1 -> Palíndromo
+
 	for i := 0; i < (n + 1) / 2 ; i++ {
 		r :=  rune(rng.Intn(0x1000))
 		runes[i] = r
-		runes[n - 1 - i]= r
+		if want_palindrome {
+			runes[ n - 1 - i ] = r
+		} else {
+			diff_r := rune(0x1000)
+			runes[ n - 1 - i ] = diff_r
+		}
 	}
-	return string(runes)
+	if !want_palindrome  {
+		runes = append(runes, rune(0x1001))
+	}
+	return string(runes), want_palindrome
 }
+func getRandomExampleWithPunctuationAndSpaces(rng *rand.Rand) (string, bool){
+	example, is_palindrome := getRandomPalindrome(rng)
+	// add spaces and punctuation
 
+}
 func TestRandomPalindromes(t *testing.T) {
 	seed := time.Now().UTC().UnixNano()
 	t.Logf("Seed: %d", seed)
 	rng := rand.New(rand.NewSource(seed))
-	var palindrome string
+	//var palindrome string
 	for i := 0; i < 1000; i++ {
-		palindrome = getRandomPalindrome(rng)
-		if IsPalindrome(palindrome) {
-			t.Errorf(`IsPalindrome failed with random palindrome %q`, palindrome)
+		palindrome, expected_palindrome := getRandomPalindrome(rng)
+		if IsPalindrome(palindrome) != expected_palindrome {
+			t.Errorf(`IsPalindrome(%q) != %v`, palindrome, expected_palindrome)
 		}
 	}
 }
