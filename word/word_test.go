@@ -76,7 +76,10 @@ func getRandomPalindrome(rng *rand.Rand) (string, bool){
 func getRandomExampleWithPunctuationAndSpaces(rng *rand.Rand) (string, bool){
 	example, is_palindrome := getRandomPalindrome(rng)
 	// add spaces and punctuation
-
+	special_char := string(rune(rng.Intn(0x0010) + 0x0020))
+	example = example + special_char
+	//fmt.Println(special_char)
+	return example, is_palindrome
 }
 func TestRandomPalindromes(t *testing.T) {
 	seed := time.Now().UTC().UnixNano()
@@ -84,7 +87,10 @@ func TestRandomPalindromes(t *testing.T) {
 	rng := rand.New(rand.NewSource(seed))
 	//var palindrome string
 	for i := 0; i < 1000; i++ {
-		palindrome, expected_palindrome := getRandomPalindrome(rng)
+		palindrome, expected_palindrome := getRandomExampleWithPunctuationAndSpaces(rng)
+		if i % 2 == 0 {
+			palindrome, expected_palindrome = getRandomPalindrome(rng)
+		}
 		if IsPalindrome(palindrome) != expected_palindrome {
 			t.Errorf(`IsPalindrome(%q) != %v`, palindrome, expected_palindrome)
 		}
